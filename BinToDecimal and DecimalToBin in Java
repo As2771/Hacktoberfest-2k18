@@ -1,0 +1,113 @@
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+
+/**
+ * This converter can be modified to act as a component that converts binary to decmial or vice versa
+ * depending on input with error checking for binary numbers. Console prompts have been added for the sake of Hacktoberfest competition.
+ *
+ * Note: this isn't the most optimized solution, and it can definitely be simplified, but I wanted to try a few additional unnecessary things
+ * for the sake of learning.
+ **/
+ 
+public class BinaryToDecimal {
+  //default constructor
+  BinaryToDecimal() 
+  {
+    
+  }
+  
+  //convert binary to decimal -- throw NumberFormatException for non binary numbers
+  public static int binaryToDecimal(int number) throws NumberFormatException {
+  
+  	// convert to string for easy format checking
+    String num = Integer.toString(number);
+    boolean isBinary = true;
+    int i = 0;
+    // check each digit for either 1 or 0
+    while (i < num.length() && isBinary) {
+        isBinary = (num.charAt(i) == '1' || num.charAt(i) == '0');
+        i++;
+    }
+    if (!isBinary) {
+        throw new NumberFormatException();
+    }
+    
+    int sum = 0;
+    i = 0;
+    // add each subsequent digit in the following format: digit * 2^iteration
+    while (number > 0) {
+        int temp = number % 10;
+        sum += temp * (Math.pow(2, i));
+        i++;
+        number = number / 10;
+    }
+    return sum;
+      
+  }
+  
+  // converts decimal to binary number
+  public static int decimalToBinary(int number) {
+  
+      // create a stack because loop reveals bin digits least significant to most
+      Deque<Integer> digits = new LinkedList<>();
+      
+      int i = 0;
+      while (number > 0) {
+          int temp = number % 2;
+          digits.push(temp);
+          number = number / 2;
+      }
+      
+      int binNum = 0;
+      while (digits.size() > 0) {
+        binNum *= 10;
+        binNum += digits.pop();
+      }
+      
+      return binNum;
+  }
+        
+          
+    
+  
+  //main method 
+    public static void main(String [] args) throws IOException {
+    Scanner keyboard = new Scanner(System.in);
+    System.out.println("Input (1) to convert binary to decimal, (2) to convert decimal to binary");
+   	
+    int input = Integer.parseInt(keyboard.nextLine());
+    // number is not a one or two
+    if (input != 1 && input != 2) {
+        throw new IOException("Number out of bounds");
+    }
+    
+    int number = 0;
+    
+    // convert binary number to decimal
+    if (input == 1) {         
+      System.out.println("Enter binary number");
+      number = Integer.parseInt(keyboard.nextLine());
+      
+      try 
+      {
+        // convert binary to decimal -- checks for proper binary format in method 
+        number = binaryToDecimal(number);
+      }
+      catch (NumberFormatException e)
+      {
+        System.err.println("Not a binary number");
+      }
+    // convert decimal number to binary  
+    } else {
+        // input decimal number
+        System.out.println("Enter a decimal number");
+        number = Integer.parseInt(keyboard.nextLine());
+        // convert decimal number to binary
+        number = decimalToBinary(number);
+    } 
+      // print converted number
+      System.out.println(number);
+    }
+}
+  
