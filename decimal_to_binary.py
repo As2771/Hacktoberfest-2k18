@@ -3,9 +3,9 @@
 import math
 import sys
 
-ZERO_BINARY_STRING = list('0000000000000000000000000000000000000000000000000000000000000000')
+ZERO_BINARY_LIST = list('0000000000000000000000000000000000000000000000000000000000000000')
 
-def decimal_to_binary(decimal, binary_string):
+def decimal_to_binary(decimal, binary_list):
     #########################################
     # Procedure:                            #   
     # find nearest power of 2 to decimal    #
@@ -14,23 +14,24 @@ def decimal_to_binary(decimal, binary_string):
     #########################################
     
     if decimal == 0:
-        return ''.join(reversed(str(binary_string)))
+        # reverse list since everything is backwards right now
+        binary_list = binary_list[::-1]
+        binary_str = ''.join(binary_list)
+        return binary_str
     if decimal < 0:
-        binary_string[63] = '1'
+        binary_list[63] = '1'
         decimal *= -1
     else:
-        power_of_two = nearest_power_of_two(decimal)
-        print(power_of_two)
-        if power_of_two > 63:
+        power = nearest_power(decimal)
+        if power > 63:
             return None
-        binary_string[power_of_two - 1] = '1'
-        
-        decimal -= power_of_two
+        binary_list[power] = '1'
+        decimal -= (2**power)
     
-    decimal_to_binary(decimal, binary_string)
+    return decimal_to_binary(decimal, binary_list)
     
-def nearest_power_of_two(decimal):
-    return int((2**(math.ceil(math.log(decimal, 2))))/2)
+def nearest_power(decimal):
+    return int(math.floor(math.log(decimal, 2)))
 
 # handle arg parsing
 def main():
@@ -41,7 +42,7 @@ def main():
         dec = int(sys.argv[1])
     except ValueError:
         print('Argument should be a decimal value not {}'.format(sys.argv[1]))
-    binary_result = decimal_to_binary(dec, ZERO_BINARY_STRING)
+    binary_result = decimal_to_binary(dec, ZERO_BINARY_LIST)
     print('{} in binary is {}'.format(dec, binary_result))
     
 
