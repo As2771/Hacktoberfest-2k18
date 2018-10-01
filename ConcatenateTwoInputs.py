@@ -1,5 +1,3 @@
-import time
-
 firstInput = input("Please enter your first input: ")
 secondInput = input("Please enter your second input: ")
 
