@@ -37,12 +37,15 @@ def nearest_power(decimal):
 def main():
     if len(sys.argv) < 1:
         print('No decimal value provided')
-        exit(1)
+        sys.exit(1)
     try:
         dec = int(sys.argv[1])
     except ValueError:
         print('Argument should be a decimal value not {}'.format(sys.argv[1]))
     binary_result = decimal_to_binary(dec, ZERO_BINARY_LIST)
+    if binary_result == None:
+        print('{} is too large'.format(dec))
+        sys.exit(1)
     print('{} in binary is {}'.format(dec, binary_result))
     
 
