@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This converter can be modified to act as a component that converts binary to decmial or vice versa
+ * This converter can act as a component that converts binary to decmial or vice versa
  * depending on input with error checking for binary numbers. Console prompts have been added for the sake of Hacktoberfest competition.
  *
  * Note: this isn't the most optimized solution, and it can definitely be simplified, but I wanted to try a few additional unnecessary things
