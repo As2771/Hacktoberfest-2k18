@@ -1,0 +1,5 @@
+# Data type of input function is string
+
+# If we add string directly the they will conactenate instead of perfoming desired operations
+
+# So first convert the variable in integer type then perform operation this will give best result
