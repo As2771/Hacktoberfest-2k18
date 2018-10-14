@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include<math.h>
+void main()
+{
+    int y,i=0,dec=0;
+    long int x;
+    printf("enter a number in binary digits");
+    scanf("%ld",&x);
+    while(y!=0)
+  {
+     y=x%10;
+    dec=dec + y*(int)pow(2,i);
+    x=x/10;
+    ++i;
+}
+printf("\n the number in decimal is %d",dec);
+}
