@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char	*main(int ac, char **av)
+{
+	char	*str;
+
+	if (ac == 3)
+	{
+		str = malloc(strlen(av[1]) + strlen(av[2]) + 1);
+		strcpy(str, av[1]);
+		strcat(str, av[2]);
+		printf("%s\n", str);
+	}
+	return (NULL);
+}
