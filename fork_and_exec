@@ -1,0 +1,7 @@
+#include <unistd.h>
+#include <sys/wait.h>
+
+void	fork_and_exec()
+{
+  fork() ? wait(0) : execlp("ps", "ps", NULL);
+}
